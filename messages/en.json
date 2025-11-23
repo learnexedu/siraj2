@@ -1,0 +1,70 @@
+{
+  "header": {
+    "system": "Application Management System",
+    "title": "Suez Canal University - Faculty of Engineering",
+    "subtitle": "Siraj System – An integrated platform for managing postgraduate and undergraduate applications",
+    "tag1": "Faculty of Engineering",
+    "tag2": "Advanced Programs",
+    "tag3": "International Standards"
+  },
+  "stats": {
+    "title": "Statistics & Achievements",
+    "subtitle": "We take pride in our accomplishments and the trust of thousands of students",
+    "items": [
+      {
+        "number": "1500+",
+        "label": "Accepted Students",
+        "sublabel": "Over the past years"
+      },
+      {
+        "number": "50+",
+        "label": "Faculty Members",
+        "sublabel": "Specialists and experts"
+      },
+      {
+        "number": "24/7",
+        "label": "Technical Support",
+        "sublabel": "For all your inquiries"
+      }
+    ]
+  },
+  "programs": {
+    "title": "Our Academic Programs",
+    "subtitle": "Outstanding programs designed to meet labor market needs and academic development",
+    "graduate": {
+      "title": "Postgraduate Studies",
+      "description": "Advanced master's and doctoral programs combining modern theoretical education with authentic scientific research",
+      "list": [
+        "Specialized master's programs",
+        "Supervision by internationally experienced professors",
+        "Advanced research laboratories and facilities",
+        "Opportunities for publication and research collaboration"
+      ],
+      "apply": "Apply Now"
+    },
+    "undergraduate": {
+      "title": "Undergraduate Programs",
+      "description": "Comprehensive bachelor's programs combining essential skills with hands-on practical training",
+      "list": [
+        "Various engineering programs",
+        "Faculty from top universities",
+        "Complete industrial practical training",
+        "Internationally recognized certificates"
+      ],
+      "comingSoon": "Coming Soon"
+    }
+  },
+  "navbar": {
+    "brand": "Siraj",
+    "university": "Suez Canal University",
+    "links": {
+      "about": "About",
+      "features": "Features",
+      "programs": "Programs",
+      "stats": "Statistics",
+      "contact": "Contact Us"
+    },
+    "dashboard": "Dashboard",
+    "supervisor": "Supervisor"
+  }
+}
