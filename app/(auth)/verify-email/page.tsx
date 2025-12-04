@@ -2,8 +2,8 @@
 import { checkToken } from "@/handlers/auth/verify";
 
 // components
-import { NotFoundError } from "@/components/error/not-found-error";
 import { EmailVerifyForm } from "@/components/auth/email-verify-form";
+import { NotFoundError } from "@/components/shared/error/not-found-error";
 
 // props
 type Props = {

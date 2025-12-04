@@ -1,24 +1,23 @@
 // components
-import { Hero } from "@/components/landing/hero";
-import { Stats } from "@/components/landing/stats";
-import { Navbar } from "@/components/landing/navbar";
-import { Footer } from "@/components/landing/footer";
-import { Contact } from "@/components/landing/contact";
-import { Features } from "@/components/landing/features";
-import { Programs } from "@/components/landing/programs";
-import { UniversityHeader } from "@/components/landing/university-header";
+import CTA from "@/components/landing/cta";
+import Hero from "@/components/landing/hero";
+import About from "@/components/landing/about";
+import Programs from "@/components/landing/programs";
+import Features from "@/components/landing/features";
+import ChatButton from "@/components/home/chat/button";
 
-export default function HomePage() {
+const Index = () => {
   return (
-    <>
-      <Navbar />
-      <UniversityHeader />
+    <div className="min-h-screen">
       <Hero />
-      <Features />
-      <Stats />
+      <About />
       <Programs />
-      <Contact />
-      <Footer />
-    </>
+      <Features />
+      <CTA />
+      {/* chat */}
+      <ChatButton />
+    </div>
   );
-}
+};
+
+export default Index;

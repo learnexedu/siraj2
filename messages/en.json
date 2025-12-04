@@ -1,70 +1,191 @@
 {
-  "header": {
-    "system": "Application Management System",
-    "title": "Suez Canal University - Faculty of Engineering",
-    "subtitle": "Siraj System – An integrated platform for managing postgraduate and undergraduate applications",
-    "tag1": "Faculty of Engineering",
-    "tag2": "Advanced Programs",
-    "tag3": "International Standards"
-  },
-  "stats": {
-    "title": "Statistics & Achievements",
-    "subtitle": "We take pride in our accomplishments and the trust of thousands of students",
-    "items": [
-      {
-        "number": "1500+",
-        "label": "Accepted Students",
-        "sublabel": "Over the past years"
-      },
-      {
-        "number": "50+",
-        "label": "Faculty Members",
-        "sublabel": "Specialists and experts"
-      },
-      {
-        "number": "24/7",
-        "label": "Technical Support",
-        "sublabel": "For all your inquiries"
-      }
-    ]
-  },
-  "programs": {
-    "title": "Our Academic Programs",
-    "subtitle": "Outstanding programs designed to meet labor market needs and academic development",
-    "graduate": {
-      "title": "Postgraduate Studies",
-      "description": "Advanced master's and doctoral programs combining modern theoretical education with authentic scientific research",
-      "list": [
-        "Specialized master's programs",
-        "Supervision by internationally experienced professors",
-        "Advanced research laboratories and facilities",
-        "Opportunities for publication and research collaboration"
-      ],
-      "apply": "Apply Now"
-    },
-    "undergraduate": {
-      "title": "Undergraduate Programs",
-      "description": "Comprehensive bachelor's programs combining essential skills with hands-on practical training",
-      "list": [
-        "Various engineering programs",
-        "Faculty from top universities",
-        "Complete industrial practical training",
-        "Internationally recognized certificates"
-      ],
-      "comingSoon": "Coming Soon"
-    }
+  "layout": {
+    "dir": "ltr",
+    "logo": "Siraj",
+    "signout": "Sign Out"
   },
   "navbar": {
-    "brand": "Siraj",
+    "home": "Home",
+    "programs": "Programs",
+    "contact": "Contact Us",
+    "apply": "Apply Now",
+    "dashboard": "Dashboard"
+  },
+  "hero": {
+    "h1": "Siraj",
+    "h2": "Faculty of Engineering Management System",
     "university": "Suez Canal University",
-    "links": {
-      "about": "About",
-      "features": "Features",
-      "programs": "Programs",
-      "stats": "Statistics",
-      "contact": "Contact Us"
-    },
+    "faculty": "Faculty of Engineering",
+    "p1": "A comprehensive system for managing all academic and administrative programs of the faculty, providing an advanced digital environment for students, faculty members, and administrative staff, and facilitating efficient and easy management of educational and administrative processes.",
     "dashboard": "Dashboard",
-    "supervisor": "Supervisor"
+    "apply": "Apply Now",
+    "more": "Learn More"
+  },
+  "features": {
+    "sectionTitle": "System Features",
+    "sectionDesc": "We provide all tools and services needed to efficiently manage the college academic and administrative processes",
+    "feature1": {
+      "title": "Application Management",
+      "description": "Submit and track admission and registration requests electronically with ease"
+    },
+    "feature2": {
+      "title": "Academic Schedules",
+      "description": "Organize lectures, exams, and discussions systematically"
+    },
+    "feature3": {
+      "title": "Comprehensive Database",
+      "description": "Securely store and manage all academic and research data"
+    },
+    "feature4": {
+      "title": "Instant Notifications",
+      "description": "Receive notifications for all updates and important deadlines"
+    },
+    "feature5": {
+      "title": "Security & Privacy",
+      "description": "Advanced protection for students’ and faculty data"
+    },
+    "feature6": {
+      "title": "Reports & Analytics",
+      "description": "Monitor academic and administrative progress with detailed reports"
+    }
+  },
+  "about": {
+    "sectionTitle": "About the College",
+    "sectionDesc": "Aiming to prepare distinguished graduates capable of facing modern engineering challenges by equipping them with the necessary scientific and practical skills for solving design, implementation, and administrative problems",
+    "vision": {
+      "title": "Our Vision",
+      "desc": "Excellence and leadership in engineering sciences at local, regional, and international levels"
+    },
+    "mission": {
+      "title": "Our Mission",
+      "desc": "Preparing distinguished engineering professionals capable of competing in various engineering disciplines, providing them with knowledge and skills through outstanding educational programs according to academic and professional standards"
+    },
+    "goals": {
+      "title": "Our Goals",
+      "desc": "Adopting academic programs in accordance with global standards that meet society’s needs and enhance collaboration across disciplines"
+    },
+    "whyChoose": {
+      "title": "Why Choose Our College?",
+      "items": {
+        "item1": "Modern academic programs aligned with quality standards",
+        "item2": "Distinguished faculty with extensive experience",
+        "item3": "Laboratories and labs equipped with the latest technologies",
+        "item4": "Continuous academic support and student guidance",
+        "item5": "Practical training opportunities and partnerships with engineering institutions"
+      }
+    },
+    "stats": {
+      "graduates": "+600",
+      "graduatesLabel": "Graduates",
+      "students": "+2202",
+      "studentsLabel": "Students",
+      "faculty": "152",
+      "facultyLabel": "Faculty Members"
+    }
+  },
+  "programs": {
+    "title": "Available Programs",
+    "button": "all programs",
+    "specialisation": "specialisation",
+    "availableSeats": "seats",
+    "details": "veiw details",
+    "p2": "Explore all available master's, doctorate, and diploma programs at the College of Engineering",
+    "p1": "We offer a diverse range of master's and doctoral programs in various engineering disciplines.",
+    "duration": "duration: 2 years",
+    "years": "2 years",
+    "available": "available",
+    "full": "full",
+    "under_review": "Requirements under review and discussion",
+    "admission_requirements": "Admission Requirements",
+    "specializations": "Specializations",
+    "department": "Department",
+    "duration2": "Duration",
+    "available_seats": "Available Seats",
+    "fees": "Fees",
+    "return": "Back to Programs"
+  },
+  "cta": {
+    "title": "Start your academic journey with us today",
+    "subtitle": "Join thousands of students and researchers using Siraj to manage their studies efficiently and easily",
+    "applyNow": "Apply Now",
+    "contactUs": "Contact Us",
+    "stats": {
+      "support": {
+        "value": "24/7",
+        "label": "Continuous Support"
+      },
+      "security": {
+        "value": "100%",
+        "label": "Security & Privacy"
+      },
+      "speed": {
+        "value": "⚡",
+        "label": "Instant Processing"
+      }
+    }
+  },
+  "footer": {
+    "logo": "Siraj",
+    "description": "Graduate Studies Management System - Suez Canal University",
+    "quickLinks": {
+      "title": "Quick Links",
+      "items": {
+        "item1": "About the Faculty",
+        "item2": "Available Programs",
+        "item3": "Admission Requirements",
+        "item4": "Contact Us"
+      }
+    },
+    "contact": {
+      "title": "Contact Information",
+      "items": {
+        "item1": "Faculty of Engineering",
+        "item2": "Suez Canal University",
+        "item3": "Ismailia, Egypt"
+      }
+    },
+    "copyright": "© {year} Suez Canal University - Faculty of Engineering. All rights reserved."
+  },
+  "contact": {
+    "heroTitle": "Contact Us",
+    "heroDesc": "We are here to answer all your inquiries and assist you in your academic journey",
+    "sections": {
+      "strategicGoals": {
+        "title": "Strategic Goals",
+        "content": "Adopting academic programs according to global standards that meet the needs of society and promote engagement with various disciplines. Providing distinguished teaching expertise through specialized programs that meet local community needs."
+      },
+      "mission": {
+        "title": "Mission",
+        "content": "The mission of the Faculty of Engineering, Suez Canal University, is to prepare outstanding engineering cadres capable of competing in various engineering disciplines and equip them with the knowledge and skills needed through distinguished educational programs according to academic and professional standards."
+      },
+      "vision": {
+        "title": "Vision",
+        "content": "The vision of the faculty is: Leadership and excellence in engineering sciences at local, regional, and international levels."
+      }
+    },
+    "contactForm": {
+      "title": "Send a Message",
+      "name": "Full Name",
+      "namePlaceholder": "Enter your full name",
+      "email": "Email",
+      "emailPlaceholder": "example@email.com",
+      "phone": "Phone",
+      "phonePlaceholder": "01234567890",
+      "subject": "Subject",
+      "subjectPlaceholder": "Subject of the message",
+      "message": "Message",
+      "messagePlaceholder": "Write your message here...",
+      "submit": "Send Message",
+      "submitting": "Sending..."
+    },
+    "contactInfo": {
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address"
+    },
+    "toast": {
+      "success": "Your message has been sent successfully. We will contact you soon",
+      "error": "Something went wrong. Please try again"
+    }
   }
 }

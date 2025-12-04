@@ -1,107 +1,124 @@
 // React & Next
 import Link from "next/link";
 
+// intl
+import { getTranslations } from "next-intl/server";
+
 // components
+import {
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetHeader,
+  SheetFooter,
+  SheetTitle,
+} from "@/components/ui/zsheet";
+import Logo from "@/components/shared/logo";
 import { Button } from "@/components/ui/button";
-import LocaleSwitcher from "@/components/utilities/language-switcher";
+import NavLink from "@/components/landing/navlinks";
+import SignoutBtn from "@/components/shared/navigation/signout-btn";
+import LocaleSwitcher from "@/components/shared/utilities/language-switcher";
 
-// auth
-import { auth } from "@/auth";
+// lib
+import { authUser } from "@/lib/auth";
 
-// primsa types
-import { UserRole } from "@prisma/client";
+// icons
+import { Menu } from "lucide-react";
 
-export async function Navbar() {
-  // session
-  const session = await auth();
+const Navbar = async () => {
+  // auth
+  const user = await authUser();
+
+  // next intel
+  const t = await getTranslations("navbar");
+
+  // layout
+  const layout = await getTranslations("layout");
+
+  // data
+  const navItems = [
+    { label: t("home"), href: "/" },
+    { label: t("programs"), href: "/programs" },
+    { label: t("contact"), href: "/contact" },
+  ];
 
   return (
-    <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 z-50">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        {/* Logo and University Branding */}
-        <Link href="/" className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-lg">س</span>
-          </div>
-          <div className="hidden sm:flex flex-col">
-            <span className="font-bold text-sm text-primary">سراج</span>
-            <span className="text-xs text-slate-500">جامعة قناة السويس</span>
-          </div>
-        </Link>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-xs">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-row-reverse items-center justify-between h-20">
+          {/* logo */}
+          <Logo />
 
-        {/* Desktop Navigation Links */}
-        <div className="hidden lg:flex items-center gap-8">
-          <Link
-            href="#about"
-            className="text-slate-600 hover:text-primary transition-colors text-sm"
-          >
-            عن الجامعة
-          </Link>
-          <Link
-            href="#features"
-            className="text-slate-600 hover:text-primary transition-colors text-sm"
-          >
-            المميزات
-          </Link>
-          <Link
-            href="#programs"
-            className="text-slate-600 hover:text-primary transition-colors text-sm"
-          >
-            البرامج
-          </Link>
-          <Link
-            href="#stats"
-            className="text-slate-600 hover:text-primary transition-colors text-sm"
-          >
-            الإحصائيات
-          </Link>
-          <Link
-            href="#contact"
-            className="text-slate-600 hover:text-primary transition-colors text-sm"
-          >
-            تواصل معنا
-          </Link>
-        </div>
+          {/* desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => (
+              <NavLink key={item.href} href={item.href}>
+                {item.label}
+              </NavLink>
+            ))}
+          </div>
 
-        {/* CTA Buttons */}
-        <div className="flex items-center gap-2">
-          {/* locale switcher */}
-          <LocaleSwitcher />
-          {/* navigations */}
-          {session?.user ? (
-            <Link
-              href={
-                session?.user.role === UserRole.supervisor
-                  ? "/supervisor"
-                  : "/dashboard"
-              }
-            >
-              <Button
-                variant="outline"
-                className="border-primary text-primary hover:bg-slate-50 hover:text-slate-400 text-sm"
+          {/* desktop Buttons */}
+          <div className="hidden md:flex items-center gap-3">
+            {/* Locale switcher */}
+            <LocaleSwitcher />
+            {/* links */}
+            <Button className="bg-linear-to-r from-accent to-accent/80 hover:from-accent/90 hover:to-accent/70 text-accent-foreground font-bold">
+              <Link href={user ? "/dashboard" : "/login"}>
+                {user ? t("dashboard") : t("apply")}
+              </Link>
+            </Button>
+          </div>
+
+          {/* mobile */}
+          <div className="md:hidden flex flex-row-reverse items-center gap-2">
+            {/* locale switcher in mobile */}
+            <LocaleSwitcher />
+
+            {/* mobile Menu */}
+            <Sheet>
+              <SheetTrigger asChild>
+                <button className="p-2 hover:bg-secondary rounded-lg transition-colors">
+                  <Menu className="w-6 h-6" />
+                </button>
+              </SheetTrigger>
+
+              <SheetContent
+                className="w-10/12 max-w-sm"
+                side={layout("dir") === "rtl" ? "right" : "left"}
               >
-                لوحة التحكم
-              </Button>
-            </Link>
-          ) : (
-            <>
-              <Link href="/register" className="hidden sm:block">
-                <Button className="bg-primary hover:bg-primary/90 text-white text-sm">
-                  قدّم الآن
-                </Button>
-              </Link>
-              <Link href="/login">
-                <Button
-                  variant="outline"
-                  className="border-primary text-primary hover:bg-slate-50 text-sm"
-                >
-                  دخول
-                </Button>
-              </Link>
-            </>
-          )}
+                <SheetHeader>
+                  <SheetTitle />
+                  {/* logo */}
+                  <Logo />
+                </SheetHeader>
+
+                {/* sheet body */}
+                <div className="flex flex-col gap-5 mx-4">
+                  {navItems.map((item) => (
+                    <NavLink key={item.href} href={item.href}>
+                      {item.label}
+                    </NavLink>
+                  ))}
+
+                  <Button className="bg-linear-to-r from-accent to-accent/80 hover:from-accent/90 hover:to-accent/70 text-accent-foreground font-bold w-full">
+                    <Link href={user ? "/dashboard" : "/login"}>
+                      {user ? t("dashboard") : t("apply")}
+                    </Link>
+                  </Button>
+                </div>
+
+                <SheetFooter>
+                  {/* sign out */}
+                  <SignoutBtn />
+                </SheetFooter>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
     </nav>
   );
-}
+};
+
+export default Navbar;

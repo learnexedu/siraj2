@@ -1,71 +1,90 @@
-'use client'
+// React & Next
+import { Card, CardContent } from "@/components/ui/card";
 
-import { Card } from '@/components/ui/card'
-import { CheckCircle2, BarChart3, Users, Shield, Clock, Zap } from 'lucide-react'
+// intl
+import { getTranslations } from "next-intl/server";
 
-const features = [
-  {
-    icon: CheckCircle2,
-    title: 'تقديم سهل',
-    description: 'واجهة بديهية تجعل عملية التقديم سريعة وخالية من التعقيدات'
-  },
-  {
-    icon: BarChart3,
-    title: 'تتبع فوري',
-    description: 'تابع حالة طلبك مرحلة بمرحلة مع تحديثات حقيقية فورية'
-  },
-  {
-    icon: Users,
-    title: 'تواصل مباشر',
-    description: 'التواصل المباشر مع المشرفين والحصول على الدعم السريع'
-  },
-  {
-    icon: Shield,
-    title: 'أمان عالي',
-    description: 'بيانات محمية بأعلى معايير الأمان والتشفير الحديث'
-  },
-  {
-    icon: Clock,
-    title: 'توفير الوقت',
-    description: 'قدّم طلبك في أي وقت ومن أي مكان بكل سهولة'
-  },
-  {
-    icon: Zap,
-    title: 'إجراءات سريعة',
-    description: 'معالجة الطلبات بسرعة عالية مع الحفاظ على الجودة'
-  }
-]
+// icons
+import {
+  FileText,
+  Calendar,
+  Bell,
+  Database,
+  Shield,
+  TrendingUp,
+} from "lucide-react";
 
-export function Features() {
+// motion
+import * as motion from "motion/react-client";
+
+// feature
+const featureItems = [
+  {
+    icon: FileText,
+    titleKey: "feature1.title",
+    descKey: "feature1.description",
+  },
+  {
+    icon: Calendar,
+    titleKey: "feature2.title",
+    descKey: "feature2.description",
+  },
+  {
+    icon: Database,
+    titleKey: "feature3.title",
+    descKey: "feature3.description",
+  },
+  { icon: Bell, titleKey: "feature4.title", descKey: "feature4.description" },
+  { icon: Shield, titleKey: "feature5.title", descKey: "feature5.description" },
+  {
+    icon: TrendingUp,
+    titleKey: "feature6.title",
+    descKey: "feature6.description",
+  },
+];
+
+const Features = async () => {
+  // intl
+  const t = await getTranslations("features");
+
   return (
-    <section id="features" className="py-20 px-4 bg-slate-50">
-      <div className="container mx-auto">
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl font-bold text-primary mb-4">مميزات نظام سراج</h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            نظام متقدم يوفر لك كل ما تحتاجه لإدارة تقديمك بكفاءة واحترافية عالية
-          </p>
+    <section id="features" className="py-24 bg-background">
+      <div className="container mx-auto px-4">
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground">
+            {t("sectionTitle")}
+          </h2>
+          <p className="text-lg text-muted-foreground">{t("sectionDesc")}</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((feature, index) => {
-            const Icon = feature.icon
-            return (
-              <Card 
-                key={index}
-                className="p-6 hover:shadow-lg transition-all duration-300 animate-fade-in-up border-slate-200 group hover:border-primary"
-                style={{ animationDelay: `${index * 50}ms` }}
-              >
-                <div className="w-12 h-12 bg-accent/20 group-hover:bg-accent/30 rounded-lg flex items-center justify-center mb-4 transition-colors">
-                  <Icon className="w-6 h-6 text-accent" />
-                </div>
-                <h3 className="text-xl font-bold text-primary mb-2">{feature.title}</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">{feature.description}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {featureItems.map((feature, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+            >
+              <Card className="group hover:shadow-xl transition-all duration-300 border-2 hover:border-accent/50 hover:-translate-y-1">
+                <CardContent className="p-6 space-y-4">
+                  <div className="w-14 h-14 rounded-xl bg-linear-to-br from-accent to-accent/70 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <feature.icon className="w-7 h-7 text-accent-foreground" />
+                  </div>
+                  <h3 className="text-xl font-bold text-foreground">
+                    {t(feature.titleKey)}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {t(feature.descKey)}
+                  </p>
+                </CardContent>
               </Card>
-            )
-          })}
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
+
+export default Features;

@@ -46,7 +46,7 @@ export default auth((req) => {
   }
 
   // if is not logged or is not public route allow all
-  if (!isLoggedIn) return Response.redirect(new URL("/login", nextUrl));
+  if (isLoggedIn) return Response.redirect(new URL("/login", nextUrl));
 
   return;
 });

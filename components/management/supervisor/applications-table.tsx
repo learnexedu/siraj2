@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Search, Filter, Eye, Download, Trash2 } from 'lucide-react'
+import { Search, Eye, Download, Trash2 } from 'lucide-react'
 
 interface Application {
   id: string
@@ -110,14 +110,14 @@ export function ApplicationsTable() {
               placeholder="ابحث بالاسم أو البريد أو رقم الطالب..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-2 pr-10 bg-dashboard-bg border border-dashboard-border rounded-lg text-white placeholder:text-dashboard-text focus:outline-none focus:border-accent"
+              className="w-full px-4 py-2 pr-10 bg-dashboard-bg border border-dashboard-border rounded-lg text-white placeholder:text-dashboard-text focus:outline-hidden focus:border-accent"
             />
           </div>
           <div className="flex gap-2">
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-4 py-2 bg-dashboard-bg border border-dashboard-border rounded-lg text-white focus:outline-none focus:border-accent"
+              className="px-4 py-2 bg-dashboard-bg border border-dashboard-border rounded-lg text-white focus:outline-hidden focus:border-accent"
             >
               <option value="all">جميع الحالات</option>
               <option value="pending">قيد الانتظار</option>

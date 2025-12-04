@@ -1,63 +1,57 @@
-'use client'
+import { GraduationCap } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 
-export function Footer() {
+const Footer = async () => {
+  // intl
+  const t = await getTranslations("footer");
+
   return (
-    <footer className="bg-primary text-white py-16 px-4">
-      <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-white/20 rounded flex items-center justify-center">
-                <span className="text-white font-bold">س</span>
-              </div>
-              <h3 className="font-bold text-lg">نظام سراج</h3>
+    <footer className="bg-primary text-primary-foreground py-12">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          {/* logo and description */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <GraduationCap className="w-8 h-8 text-accent" />
+              <h3 className="text-2xl font-bold">{t("logo")}</h3>
             </div>
-            <p className="text-white/80 text-sm leading-relaxed">
-              منصة متكاملة لإدارة تقديمات الدراسات العليا والبكالوريوس في كلية الهندسة بجامعة قناة السويس
+            <p className="text-primary-foreground/80 leading-relaxed">
+              {t("description")}
             </p>
           </div>
-          <div>
-            <h4 className="font-bold mb-4">روابط سريعة</h4>
-            <ul className="space-y-2 text-white/80 text-sm">
-              <li><a href="#features" className="hover:text-white transition-colors">المميزات</a></li>
-              <li><a href="#programs" className="hover:text-white transition-colors">البرامج</a></li>
-              <li><a href="#stats" className="hover:text-white transition-colors">الإحصائيات</a></li>
-              <li><a href="#contact" className="hover:text-white transition-colors">تواصل معنا</a></li>
+
+          {/* quick links */}
+          <div className="space-y-4">
+            <h4 className="text-xl font-bold">{t("quickLinks.title")}</h4>
+            <ul className="space-y-2 text-primary-foreground/80">
+              {Array.from({ length: 4 }, (_, index) => (
+                <li key={index}>
+                  <a href="#" className="hover:text-accent transition-colors">
+                    {t(`quickLinks.items.item${index + 1}`)}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
-          <div>
-            <h4 className="font-bold mb-4">الدعم</h4>
-            <ul className="space-y-2 text-white/80 text-sm">
-              <li><a href="#" className="hover:text-white transition-colors">مركز المساعدة</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">الأسئلة الشائعة</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">الدليل الإرشادي</a></li>
-              <li><a href="#contact" className="hover:text-white transition-colors">التواصل</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-bold mb-4">قانوني</h4>
-            <ul className="space-y-2 text-white/80 text-sm">
-              <li><a href="#" className="hover:text-white transition-colors">شروط الخدمة</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">سياسة الخصوصية</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">سياسة البيانات</a></li>
-            </ul>
+
+          {/* contact info */}
+          <div className="space-y-4">
+            <h4 className="text-xl font-bold">{t("contact.title")}</h4>
+            <div className="space-y-2 text-primary-foreground/80">
+              {Array.from({ length: 3 }, (_, index) => (
+                <p key={index}>{t(`contact.items.item${index + 1}`)}</p>
+              ))}
+            </div>
           </div>
         </div>
-        
-        <div className="border-t border-white/20 pt-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <p className="text-white/80 text-sm">
-              <span className="font-semibold">جامعة قناة السويس - كلية الهندسة</span>
-            </p>
-            <p className="text-white/80 text-sm text-center md:text-right">
-              جميع الحقوق محفوظة © 2025 نظام سراج
-            </p>
-          </div>
-          <p className="text-white/70 text-xs text-center">
-            تم التطوير بأحدث التقنيات | نظام آمن وموثوق للتقديمات الأكاديمية
-          </p>
+
+        {/* copyright */}
+        <div className="border-t border-primary-foreground/20 pt-8 text-center text-primary-foreground/60">
+          <p>{t("copyright", { year: new Date().getFullYear() })}</p>
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
+
+export default Footer;

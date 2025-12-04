@@ -29,7 +29,8 @@ export const register = async (
   const phoneEmail = await getUserByEmail(email);
 
   // phone exist
-  if (phoneEmail) return { state: false, message: "رقم الهاتف موجود بالفعل" };
+  if (phoneEmail)
+    return { state: false, message: "البريد الالكتروني موجود بالفعل" };
 
   try {
     // if success then push data to database

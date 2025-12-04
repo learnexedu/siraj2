@@ -1,13 +1,11 @@
 // config
 generator client {
-  provider      = "prisma-client-js"
-  binaryTargets = ["native", "rhel-openssl-1.0.x"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 // enums
@@ -17,41 +15,66 @@ enum UserRole {
   undergraduate
 }
 
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum EnrollmentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  WAITLISTED
+}
+
+enum SemesterType {
+  TERM1
+  TERM2
+  SUMMER
+  CUSTOM
+}
+
+enum CourseType {
+  MANDATORY
+  OPTIONAL
+}
+
+enum DepartmentType {
+  CIVIL
+  ARCHITECTURE
+  ELECTRICAL
+  MECHANICAL
+}
+
+enum Degree {
+  DIPLOMA
+  BACHELOR
+  MASTER
+  DOCTORATE
+}
+
 // models
+// system
 model User {
-  id            String                           @id @default(cuid())
+  id            String    @id @default(cuid())
   name          String?
-  email         String                           @unique
+  email         String    @unique
   emailVerified DateTime? @map("email_verified")
   phoneVerified DateTime? @map("phone_verified")
   password      String?
-  created_at    DateTime                         @default(now())
-  updated_at    DateTime                         @updatedAt
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
   role          UserRole
 
   //            @relations
-  accounts      Account[]
-  userInfo      UserInfo?
+  accounts Account[]
+  students Student[]
 
   @@map("users")
 }
 
-model UserInfo {
-  id         String    @id
-  phone      String    @unique
-  image      String?
-  nationalId String
-  address    String
-  birthDate  DateTime
-
-  //         Relation
-  user       User     @relation(fields: [id], references: [id], onDelete: Cascade)
-
-  @@map("user_infos")
-}
-
 model Account {
-  id                String                              @id @default(cuid())
+  id                String  @id @default(cuid())
   userId            String  @map("user_id")
   type              String
   provider          String
@@ -70,9 +93,9 @@ model Account {
 }
 
 model VerificationToken {
-  id     String    @id @default(cuid())
+  id     String   @id @default(cuid())
   email  String
-  token  String    @unique
+  token  String   @unique
   otp    String
   expire DateTime
 
@@ -81,20 +104,20 @@ model VerificationToken {
 }
 
 model Setting {
-  id        Int       @id @default(autoincrement())
+  id        String   @id @default(cuid())
   value     Json
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
   category  String
-  subKey    String
+  subKey    String   @map("sub_key")
 
   @@unique([category, subKey])
   @@map("settings")
 }
 
 model Image {
-  id         String    @id @default(cuid())
-  created_at DateTime  @default(now())
+  id         String   @id @default(cuid())
+  created_at DateTime @default(now())
   key        String
   url        String?
   title      String?
@@ -103,8 +126,8 @@ model Image {
 }
 
 model File {
-  id         String    @id @default(cuid())
-  created_at DateTime  @default(now())
+  id         String   @id @default(cuid())
+  created_at DateTime @default(now())
   key        String
   url        String?
   title      String?
@@ -112,298 +135,292 @@ model File {
   @@map("files")
 }
 
-// ---------------------------
-// ENUMS
-// ---------------------------
-enum Gender {
-  MALE
-  FEMALE
-  OTHER
-}
-
-enum RegistrationStatus {
-  PENDING
-  APPROVED
-  REJECTED
-  WAITLISTED
-}
-
-
-// ---------------------------
-// STUDENT
-// ---------------------------
-model Student {
-  id              BigInt      @id @default(autoincrement())
-  firstName       String
-  lastName        String
-  email           String       @unique
-  phone           String?
-  nationalId      String?      @unique
-  dob             DateTime?
-  gender          Gender?
-
-  facultyId       BigInt?
-  faculty         Faculty?     @relation(fields: [facultyId], references: [id])
-
-  majorId         BigInt?
-  major           Major?       @relation(fields: [majorId], references: [id])
-
-  addressStreet   String?
-  addressCity     String?
-  addressState    String?
-  addressZip      String?
-
-  creditsTaken    Int          @default(0)
-  creditsEarned   Int          @default(0)
-  gpa             Decimal?     @db.Decimal(4,2)
-  classStanding   String?
-
-  enrollments     Enrollment[]
-  grades          StudentGrade[]
-  registrationRequests RegistrationRequest[]
-  advising        Advising[]
-  documents       Document[]
-
-  createdAt       DateTime     @default(now())
-}
-
-
-// ---------------------------
-// FACULTY
-// ---------------------------
-model Faculty {
-  id          BigInt       @id @default(autoincrement())
-  name        String
-  code        String        @unique
-  description String?
-
-  departments Department[]
-  students    Student[]
-}
-
-
-// ---------------------------
-// DEPARTMENT
-// ---------------------------
+// acadmic
 model Department {
-  id          BigInt     @id @default(autoincrement())
-  name        String
-  code        String      @unique
-  location    String?
+  id   String         @id @default(cuid())
+  name Json
+  type DepartmentType
 
-  facultyId   BigInt
-  faculty     Faculty     @relation(fields: [facultyId], references: [id], onDelete: Cascade)
+  // @ relations
+  programs Program[]
+  courses  Course[]
+  majors   Major[]
+  students Student[]
 
-  majors        Major[]
-  facultyMembers FacultyMember[]
-  courses       Course[]
+  @@map("departments")
 }
 
-
-// ---------------------------
-// MAJOR
-// ---------------------------
 model Major {
-  id           BigInt     @id @default(autoincrement())
-  name         String
-  description  String?
-  departmentId BigInt
+  id          String @id @default(cuid())
+  name        String
+  description String
 
+  // @ relations
+  departmentId String
   department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
   students     Student[]
-  advising     Advising[]
+
+  @@map("majors")
 }
 
+model Semester {
+  id             String       @id @default(cuid())
+  name           String
+  startDate      DateTime     @map("start_date")
+  endDate        DateTime     @map("end_date")
+  examStartDate  DateTime     @map("exam_start_date")
+  examEndDate    DateTime     @map("exam_end_date")
+  withdrawalDate DateTime     @map("withdrawal_date")
+  type           SemesterType
 
-// ---------------------------
-// FACULTY MEMBER
-// ---------------------------
-model FacultyMember {
-  id           BigInt     @id @default(autoincrement())
-  firstName    String
-  lastName     String
-  email        String      @unique
-  phone        String?
-  
-  departmentId BigInt
+  // @ relations
+  program  Program[]
+  grades   Grade[]
+  lectures Lecture[]
+  sections Section[]
+
+  @@map("semesters")
+}
+
+model Program {
+  id         String @id @default(cuid())
+  name       Json
+  overview   Json
+  objectives Json
+
+  mandatory      Int
+  optional       Int
+  degree         Degree
+  createdAt      DateTime        @default(now()) @map("created_at")
+  updatedAt      DateTime        @updatedAt @map("updated_at")
+  // @ relation
+  departmentId   String          @map("department_id")
+  department     Department      @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  programCourses ProgramCourse[]
+  progress       Progress[]
+
+  semester    Semester?    @relation(fields: [semesterId], references: [id])
+  semesterId  String?      @map("semester_id")
+  students    Student[]
+  enrollments Enrollment[]
+
+  @@map("programs")
+}
+
+model Course {
+  id      String @id @default(cuid())
+  code    String
+  title   Json
+  credits Int
+
+  // credit breakdown
+  written   Int
+  work      Int
+  practical Int
+  oral      Int
+
+  // @ relations
+  departmentId String     @map("department_id")
   department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
 
-  sections     Section[]
-  advising     Advising[]
+  programCourses ProgramCourse[]
+  prerequisites  Prerequisite[]  @relation("CoursePrereqs")
+  requiredFor    Prerequisite[]  @relation("CourseRequiredFor")
+  grades         Grade[]
+  sections       Section[]
+  lectures       Lecture[]
+
+  @@map("courses")
 }
 
+model ProgramCourse {
+  id String @id @default(cuid())
 
-// ---------------------------
-// COURSE
-// ---------------------------
-model Course {
-  id            BigInt      @id @default(autoincrement())
-  code          String
-  title         String
-  credits       Int
-  departmentId  BigInt
+  // @ relations 
+  programId String  @map("program_id")
+  program   Program @relation(fields: [programId], references: [id], onDelete: Cascade)
 
-  department    Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
-  sections      Section[]
+  courseId String @map("course_id")
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
-  prerequisites Prerequisite[] @relation("CoursePrereqs")
-  requiredFor   Prerequisite[] @relation("CourseRequiredFor")
+  type CourseType
 
-  grades        StudentGrade[]
+  @@map("program_courses")
 }
 
+model Progress {
+  id        String   @id @default(cuid())
+  total     Int
+  earned    Int      @default(0)
+  remaining Int      @default(0)
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-// ---------------------------
-// PREREQUISITE
-// ---------------------------
-model Prerequisite {
-  id                BigInt @id @default(autoincrement())
+  // @ relations
+  programId String  @map("program_id")
+  program   Program @relation(fields: [programId], references: [id], onDelete: Cascade)
+  studentId String  @map("student_id")
+  student   Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
-  courseId          BigInt
-  course            Course @relation("CoursePrereqs", fields: [courseId], references: [id], onDelete: Cascade)
-
-  prerequisiteId    BigInt
-  prerequisite      Course @relation("CourseRequiredFor", fields: [prerequisiteId], references: [id], onDelete: Cascade)
+  @@unique([studentId, programId])
+  @@map("progresses")
 }
 
+model Grade {
+  id          String  @id @default(cuid())
+  grade       String
+  //   credits earned
+  credits     Int
+  gradePoints Decimal @map("grade_points") @db.Decimal(4, 2)
 
-// ---------------------------
-// SEMESTER
-// ---------------------------
-model Semester {
-  id            BigInt     @id @default(autoincrement())
-  code          String      @unique
-  name          String
-  startDate     DateTime
-  endDate       DateTime
-  examStartDate DateTime?
-  examEndDate   DateTime?
-  withdrawalDate DateTime?
+  // @ relations
+  studentId String  @map("student_id")
+  student   Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
-  sections      Section[]
-  grades        StudentGrade[]
-  registrationRequests RegistrationRequest[]
-}
+  courseId String @map("course_id")
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
-
-// ---------------------------
-// SECTION
-// ---------------------------
-model Section {
-  id                BigInt     @id @default(autoincrement())
-
-  courseId          BigInt
-  course            Course     @relation(fields: [courseId], references: [id], onDelete: Cascade)
-
-  semesterId        BigInt
-  semester          Semester   @relation(fields: [semesterId], references: [id], onDelete: Cascade)
-
-  instructorId      BigInt?
-  instructor        FacultyMember? @relation(fields: [instructorId], references: [id])
-
-  sectionCode       String
-  time              String?
-  room              String?
-  currentEnrollment Int       @default(0)
-  maxEnrollment     Int
-
-  enrollments       Enrollment[]
-
-  // Correct opposite fields
-  preferredRequests RegistrationRequest[] @relation("PreferredRequests")
-  alternateRequests RegistrationRequest[] @relation("AlternateRequests")
-}
-
-
-// ---------------------------
-// ENROLLMENT
-// ---------------------------
-model Enrollment {
-  studentId    BigInt
-  sectionId    BigInt
-
-  student      Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
-  section      Section @relation(fields: [sectionId], references: [id], onDelete: Cascade)
-
-  grade        String?
-
-  @@id([studentId, sectionId])
-}
-
-
-// ---------------------------
-// STUDENT GRADES
-// ---------------------------
-model StudentGrade {
-  id           BigInt     @id @default(autoincrement())
-
-  studentId    BigInt
-  courseId     BigInt
-  semesterId   BigInt
-
-  student      Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
-  course       Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  semester     Semester @relation(fields: [semesterId], references: [id], onDelete: Cascade)
-
-  grade        String?
-  creditsEarned Int?
-  gradePoints   Decimal? @db.Decimal(4,2)
+  semesterId String   @map("semester_id")
+  semester   Semester @relation(fields: [semesterId], references: [id], onDelete: Cascade)
 
   @@unique([studentId, courseId, semesterId])
+  @@map("grades")
 }
 
+model Student {
+  id          String   @id @default(cuid())
+  firstName   String   @map("first_name")
+  lastName    String   @map("last_name")
+  fullName    String   @map("full_name")
+  phone       String   @unique
+  image       String
+  nationality String
+  nationalId  String   @unique @map("national_id")
+  address     String
+  country     String
+  state       String
+  dob         String
+  gender      Gender
+  degree      Degree
+  createdAt   DateTime @default(now()) @map("created_at")
 
-// ---------------------------
-// ADVISING
-// ---------------------------
-model Advising {
-  id         BigInt     @id @default(autoincrement())
+  // @ relations
+  userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  studentId  BigInt
-  student    Student    @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  facultyId String?  @map("faculty_id")
+  faculty   Faculty? @relation(fields: [facultyId], references: [id])
 
-  majorId    BigInt
-  major      Major      @relation(fields: [majorId], references: [id], onDelete: Cascade)
+  majorId String? @map("major_id")
+  major   Major?  @relation(fields: [majorId], references: [id])
 
-  advisorId  BigInt
-  advisor    FacultyMember @relation(fields: [advisorId], references: [id], onDelete: Cascade)
+  departmentId String?     @map("department_id")
+  department   Department? @relation(fields: [departmentId], references: [id])
+
+  programId String?  @map("program_id")
+  program   Program? @relation(fields: [programId], references: [id])
+
+  enrollments Enrollment[]
+  grades      Grade[]
+  progresses  Progress[]
+  attandances Attandance[]
+
+  @@map("students")
 }
 
-
-// ---------------------------
-// REGISTRATION REQUESTS
-// ---------------------------
-model RegistrationRequest {
-  id                    BigInt     @id @default(autoincrement())
-
-  studentId             BigInt
-  student               Student    @relation(fields: [studentId], references: [id], onDelete: Cascade)
-
-  semesterId            BigInt
-  semester              Semester   @relation(fields: [semesterId], references: [id], onDelete: Cascade)
-
-  preferredSectionId    BigInt?
-  preferredSection      Section? @relation("PreferredRequests", fields: [preferredSectionId], references: [id])
-
-  alternateSectionId    BigInt?
-  alternateSection      Section? @relation("AlternateRequests", fields: [alternateSectionId], references: [id])
-
-  status                RegistrationStatus @default(PENDING)
-
-  createdAt             DateTime   @default(now())
-}
-
-
-// ---------------------------
-// STUDENT DOCUMENTS
-// ---------------------------
-model Document {
-  id          BigInt     @id @default(autoincrement())
-  studentId   BigInt
-  student     Student    @relation(fields: [studentId], references: [id], onDelete: Cascade)
-
+model Faculty {
+  id          String  @id @default(cuid())
   name        String
-  type        String
-  url         String
-  uploadedAt  DateTime       @default(now())
+  code        String  @unique
+  description String
+  location    String
+  country     String
+  state       String?
+
+  // @ relations
+  students Student[]
+
+  @@map("faculties")
+}
+
+model Prerequisite {
+  id String @id @default(cuid())
+
+  // @ relations 
+  courseId       String @map("course_id")
+  course         Course @relation("CoursePrereqs", fields: [courseId], references: [id], onDelete: Cascade)
+  prerequisiteId String @map("prerequisite_id")
+  prerequisite   Course @relation("CourseRequiredFor", fields: [prerequisiteId], references: [id], onDelete: Cascade)
+
+  @@map("prerequisites")
+}
+
+model Enrollment {
+  id     String           @id @default(cuid())
+  status EnrollmentStatus
+
+  // @ relations
+  programId String  @map("program_id")
+  program   Program @relation(fields: [programId], references: [id])
+  studentId String  @map("student_id")
+  student   Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, programId])
+  @@map("enrollments")
+}
+
+model Lecture {
+  id       String @id @default(cuid())
+  number   Int    @default(autoincrement())
+  date     String
+  time     String
+  room     String
+  location String
+
+  // @ relations 
+  attandance Attandance[]
+  // instructorId Int?
+  // instructor   Doctor? @relation(fields: [instructorId], references: [id])
+  courseId   String       @map("course_id")
+  course     Course       @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  semesterId String   @map("semester_id")
+  semester   Semester @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+
+  @@map("lectures")
+}
+
+model Section {
+  id          String @id @default(cuid())
+  // instructorId BigInt?
+  // instructor   FacultyMember? @relation(fields: [instructorId], references: [id])
+  sectionCode String @map("section_code")
+  date        String
+  time        String
+  room        String
+
+  // @ relations 
+  courseId String @map("course_id")
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  semesterId String   @map("semester_id")
+  semester   Semester @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+
+  @@map("sections")
+}
+
+model Attandance {
+  id   String  @id @default(cuid())
+  date String?
+  time String?
+  room String?
+
+  // @ relations 
+  studentId String  @map("student_id")
+  student   Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  // lecture or section
+  lecture   Lecture? @relation(fields: [lectureId], references: [id])
+  lectureId String?  @map("lecture_id")
+
+  @@map("attandances")
 }

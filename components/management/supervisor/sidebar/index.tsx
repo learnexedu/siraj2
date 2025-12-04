@@ -1,8 +1,11 @@
 "use client";
 // components
+import SideBarLayout from "@/components/management/layout/sidebar/sidebar";
+import {
+  SideBarCollapsibleMenu,
+  SideBarMenuGroup,
+} from "@/components/management/layout/sidebar";
 import { SidebarContent, SidebarGroup } from "@/components/ui/sidebar";
-import SideBarLayout from "@/components/management/layout/header/sidebar/sidebar";
-import { SideBarMenuGroup } from "@/components/management/layout/header/sidebar";
 
 // constants
 import { supervisorMenu } from "@/constants/menu";
@@ -21,11 +24,23 @@ export default function SupervisorSideBar({ name }: Props) {
     <SideBarLayout lang="ar" user={name}>
       <SidebarContent>
         <SidebarGroup className="group-data-[collapsible=icon]:hidden space-y-4">
-          {/* reservation */}
+          {/* dashbaord */}
           <SideBarMenuGroup
             url={url}
-            label="التقديمات"
+            label="لوحة التحكم"
             menu={supervisorMenu.application}
+          />
+          {/* enrollment */}
+          <SideBarCollapsibleMenu
+            url={url}
+            collapsibleMenu={supervisorMenu.enrollment}
+            label="enrollment"
+          />
+          {/* settings */}
+          <SideBarCollapsibleMenu
+            url={url}
+            collapsibleMenu={supervisorMenu.settings}
+            label="settings"
           />
         </SidebarGroup>
       </SidebarContent>

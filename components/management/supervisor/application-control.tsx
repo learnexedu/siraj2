@@ -58,7 +58,7 @@ export function ApplicationControl() {
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                className="w-full px-4 py-2 pr-10 bg-dashboard-bg border border-dashboard-border rounded-lg text-white focus:outline-none focus:border-accent"
+                className="w-full px-4 py-2 pr-10 bg-dashboard-bg border border-dashboard-border rounded-lg text-white focus:outline-hidden focus:border-accent"
               />
             </div>
           </div>
@@ -70,7 +70,7 @@ export function ApplicationControl() {
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className="w-full px-4 py-2 pr-10 bg-dashboard-bg border border-dashboard-border rounded-lg text-white focus:outline-none focus:border-accent"
+                className="w-full px-4 py-2 pr-10 bg-dashboard-bg border border-dashboard-border rounded-lg text-white focus:outline-hidden focus:border-accent"
               />
             </div>
           </div>
@@ -90,7 +90,7 @@ export function ApplicationControl() {
               type="text"
               value={programName}
               onChange={(e) => setProgramName(e.target.value)}
-              className="w-full px-4 py-2 bg-dashboard-bg border border-dashboard-border rounded-lg text-white focus:outline-none focus:border-accent"
+              className="w-full px-4 py-2 bg-dashboard-bg border border-dashboard-border rounded-lg text-white focus:outline-hidden focus:border-accent"
             />
           </div>
           <div>
@@ -99,7 +99,7 @@ export function ApplicationControl() {
               type="number"
               value={seats}
               onChange={(e) => setSeats(e.target.value)}
-              className="w-full px-4 py-2 bg-dashboard-bg border border-dashboard-border rounded-lg text-white focus:outline-none focus:border-accent"
+              className="w-full px-4 py-2 bg-dashboard-bg border border-dashboard-border rounded-lg text-white focus:outline-hidden focus:border-accent"
             />
           </div>
           <div>
@@ -109,7 +109,7 @@ export function ApplicationControl() {
               onChange={(e) => setRequirements(e.target.value)}
               placeholder="ادرج شروط القبول والمتطلبات الأساسية..."
               rows={4}
-              className="w-full px-4 py-2 bg-dashboard-bg border border-dashboard-border rounded-lg text-white placeholder:text-dashboard-text focus:outline-none focus:border-accent resize-none"
+              className="w-full px-4 py-2 bg-dashboard-bg border border-dashboard-border rounded-lg text-white placeholder:text-dashboard-text focus:outline-hidden focus:border-accent resize-none"
             />
           </div>
         </div>

@@ -6,4 +6,4 @@ declare global {
 
 const prisma = globalThis.prisma || new PrismaClient();
 
-export default prisma;
+export prisma;

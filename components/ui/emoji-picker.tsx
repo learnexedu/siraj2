@@ -38,7 +38,7 @@ function EmojiPickerSearch({
     >
       <SearchIcon className="size-4 shrink-0 opacity-50" />
       <EmojiPickerPrimitive.Search
-        className="outline-none placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm disabled:cursor-not-allowed disabled:opacity-50"
+        className="outline-hidden placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm disabled:cursor-not-allowed disabled:opacity-50"
         data-slot="emoji-picker-search"
         {...props}
       />
@@ -94,7 +94,7 @@ function EmojiPickerContent({
 }: React.ComponentProps<typeof EmojiPickerPrimitive.Viewport>) {
   return (
     <EmojiPickerPrimitive.Viewport
-      className={cn("outline-none relative flex-1", className)}
+      className={cn("outline-hidden relative flex-1", className)}
       data-slot="emoji-picker-viewport"
       {...props}
     >
@@ -130,7 +130,7 @@ function EmojiPickerFooter({
   return (
     <div
       className={cn(
-        "max-w-[--frimousse-viewport-width] flex w-full min-w-0 items-center gap-1 border-t p-2",
+        "max-w-(--frimousse-viewport-width) flex w-full min-w-0 items-center gap-1 border-t p-2",
         className
       )}
       data-slot="emoji-picker-footer"

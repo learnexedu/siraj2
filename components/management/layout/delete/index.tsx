@@ -3,7 +3,6 @@
 import React from "react";
 
 // components
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -14,17 +13,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { LoadingBtnEn } from "@/app/_components/layout/loadingBtn";
+import { Button } from "@/components/ui/button";
+import { LoadingBtnEn } from "@/components/shared/navigation/loading-btn";
 
 // icons
 import { Trash2 } from "lucide-react";
 
 // props
 interface Props {
-  children?: JSX.Element;
+  children?: React.JSX.Element;
   item?: string;
   description?: string;
-  onConfirm: () => Promise<any>;
+  onConfirm: () => Promise<boolean>;
   onSuccess?: () => void;
   onFailure?: () => void;
 }

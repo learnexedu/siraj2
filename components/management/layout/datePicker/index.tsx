@@ -4,6 +4,7 @@ import React from "react";
 // packages
 import { format } from "date-fns";
 import { ar } from "date-fns/locale";
+import { useLocale } from "next-intl";
 import { enUS } from "date-fns/locale";
 
 // component
@@ -17,7 +18,6 @@ import {
 
 // utils
 import { cn } from "@/lib/utils";
-import { isLangEn } from "@/app/_utils";
 
 // icons
 import { CalendarIcon } from "lucide-react";
@@ -31,9 +31,10 @@ interface Props {
 }
 
 // date picker
-export const DatePicker = ({ setDate, lang, date, disabled }: Props) => {
+export const DatePicker = ({ setDate, date, disabled }: Props) => {
   // langauge check
-  const isEn = isLangEn(lang);
+  const locale = useLocale();
+  const isEn = locale === "en";
 
   // date
   const [newDate, setNewDate] = React.useState<Date | undefined>(

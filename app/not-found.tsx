@@ -1,5 +1,5 @@
 // components
-import { NotFoundError } from "@/components/error/not-found-error";
+import { NotFoundError } from "@/components/shared/error/not-found-error";
 
 const Page = () => {
   return <NotFoundError />;

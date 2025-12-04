@@ -1,8 +1,8 @@
 // components
-import ManagementHeader from "@/components/management/layout/header";
-import { ForbiddenError } from "@/components/error/forbidden-error";
 import { getSidebarByRole } from "@/components/management/sidebars";
+import ManagementHeader from "@/components/management/layout/header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { ForbiddenError } from "@/components/shared/error/forbidden-error";
 
 // prisma types
 import { UserRole } from "@prisma/client";
@@ -24,7 +24,7 @@ export default async function SupervisorLayout({
   // if admin
 
   return (
-    <SidebarProvider defaultOpen={false} dir="ltr">
+    <SidebarProvider defaultOpen={false} dir="rtl">
       {/* sidebar */}
       {getSidebarByRole(user.role, user.name ?? "")}
       {/* main body */}

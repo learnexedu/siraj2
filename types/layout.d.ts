@@ -13,3 +13,9 @@ export interface Card {
   desc: string;
   icon?: React.ReactNode | IconType | string;
 }
+
+type DepartmentItem = {
+  type: DepartmentType;
+  label: string;
+  style?: string;
+};

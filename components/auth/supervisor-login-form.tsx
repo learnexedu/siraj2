@@ -59,7 +59,7 @@ export function SupervisorLoginForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary via-primary/95 to-primary/90 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-linear-to-br from-primary via-primary/95 to-primary/90 flex items-center justify-center p-4 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
@@ -89,7 +89,7 @@ export function SupervisorLoginForm() {
               type="email"
               placeholder="your@email.com"
               {...form.register("email")}
-              className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all"
+              className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-hidden focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all"
             />
             {form.formState.errors.email && (
               <p className="text-red-500 text-xs mt-1">
@@ -116,7 +116,7 @@ export function SupervisorLoginForm() {
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
                 {...form.register("password")}
-                className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all"
+                className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-hidden focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all"
               />
               <button
                 type="button"

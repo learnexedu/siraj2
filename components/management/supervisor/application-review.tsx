@@ -96,9 +96,9 @@ export function ApplicationReview({ applicationId }: ApplicationReviewProps) {
       </Card>
 
       {/* AI Review Section */}
-      <Card className="p-6 border-dashboard-border bg-gradient-to-br from-dashboard-card to-dashboard-card/80 border-accent/30">
+      <Card className="p-6 border-dashboard-border bg-linear-to-br from-dashboard-card to-dashboard-card/80 border-accent/30">
         <div className="flex items-start gap-3 mb-4">
-          <div className="w-10 h-10 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0">
+          <div className="w-10 h-10 bg-accent/20 rounded-lg flex items-center justify-center shrink-0">
             <Sparkles className="w-6 h-6 text-accent" />
           </div>
           <div>
@@ -110,7 +110,7 @@ export function ApplicationReview({ applicationId }: ApplicationReviewProps) {
         {/* Score */}
         <div className="mb-6 pb-6 border-b border-dashboard-border">
           <div className="flex items-center gap-4">
-            <div className="w-20 h-20 rounded-lg bg-accent/20 flex items-center justify-center flex-shrink-0">
+            <div className="w-20 h-20 rounded-lg bg-accent/20 flex items-center justify-center shrink-0">
               <span className="text-3xl font-bold text-accent">{aiReview.score}</span>
             </div>
             <div>
@@ -175,7 +175,7 @@ export function ApplicationReview({ applicationId }: ApplicationReviewProps) {
           onChange={(e) => setNotes(e.target.value)}
           placeholder="أضف ملاحظاتك وتقييمك على الطلب..."
           rows={4}
-          className="w-full px-4 py-3 bg-dashboard-bg border border-dashboard-border rounded-lg text-white placeholder:text-dashboard-text focus:outline-none focus:border-accent resize-none"
+          className="w-full px-4 py-3 bg-dashboard-bg border border-dashboard-border rounded-lg text-white placeholder:text-dashboard-text focus:outline-hidden focus:border-accent resize-none"
         />
       </Card>
 
@@ -187,7 +187,7 @@ export function ApplicationReview({ applicationId }: ApplicationReviewProps) {
           onChange={(e) => setCollegeRequirements(e.target.value)}
           placeholder="اكتب متطلبات ولوائح الكلية ذات الصلة..."
           rows={4}
-          className="w-full px-4 py-3 bg-dashboard-bg border border-dashboard-border rounded-lg text-white placeholder:text-dashboard-text focus:outline-none focus:border-accent resize-none"
+          className="w-full px-4 py-3 bg-dashboard-bg border border-dashboard-border rounded-lg text-white placeholder:text-dashboard-text focus:outline-hidden focus:border-accent resize-none"
         />
       </Card>
 

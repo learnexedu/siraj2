@@ -31,7 +31,8 @@ export const checkToken = async (token: string) => {
   const userExist = await getUserByEmail(tokenExist.email);
 
   // if user not exist
-  if (!userExist) return { state: false, message: "لا يوجد حساب بهذا الرقم" };
+  if (!userExist)
+    return { state: false, message: "لا يوجد حساب بهذا المعلومات" };
 
   // success without message
   return { email: userExist.email, name: userExist.name, otp: tokenExist.otp };

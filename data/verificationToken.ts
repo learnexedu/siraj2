@@ -8,7 +8,6 @@ import prisma from "@/lib/db/prisma";
 import { generateOtp } from "@/utils/auth";
 
 // lib
-import { sendEmail } from "@/lib/mail";
 import { sendEmailOtp } from "@/lib/notifications";
 
 export const getVerificationTokenByToken = async (token: string) => {

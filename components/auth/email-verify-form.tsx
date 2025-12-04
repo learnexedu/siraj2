@@ -8,14 +8,12 @@ import z from "zod";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-// shadcn OTP
+// components
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-
-// ui components
 import { toast } from "sonner";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -132,7 +130,7 @@ export function EmailVerifyForm({ email, name, otp }: Props) {
                         key={index}
                         index={index}
                         id={`otp-${index}`}
-                        className="w-12 h-12 text-center border-2 border-slate-300 rounded-lg font-bold text-xl focus:outline-none focus:border-accent transition-colors"
+                        className="w-12 h-12 text-center border-2 border-slate-300 rounded-lg font-bold text-xl focus:outline-hidden focus:border-accent transition-colors"
                       />
                     ))}
                   </InputOTPGroup>

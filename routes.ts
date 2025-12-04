@@ -9,6 +9,8 @@ export const publicRoutes = [
   "/api/auth/get-session",
   // pages
   "/",
+  "/contact",
+  "/programs",
   // apis
   "/api/timezone",
 ];
@@ -19,7 +21,7 @@ export const publicRoutes = [
 */
 export const DynamicpublicRoutes = [
   // pages
-  "/consultant",
+  "/programs",
   // apis
   "/api/whatsapp",
 ];

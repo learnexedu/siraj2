@@ -24,7 +24,7 @@ export function ApplicationStatus() {
             <div key={index} className="flex gap-4">
               {/* Timeline Line */}
               <div className="flex flex-col items-center">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${
                   step.status === 'completed' ? 'bg-green-100' :
                   step.status === 'in-progress' ? 'bg-blue-100' :
                   'bg-slate-100'
@@ -62,7 +62,7 @@ export function ApplicationStatus() {
       {/* Status Details */}
       <Card className="p-8 border-slate-200 bg-blue-50 border-blue-200">
         <div className="flex gap-4">
-          <Clock className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
+          <Clock className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
           <div>
             <h3 className="font-bold text-blue-900 mb-1">الحالة الحالية</h3>
             <p className="text-sm text-blue-800">

@@ -1,11 +1,10 @@
 "use server";
 // React & Next
 import Link from "next/link";
-import Image from "next/image";
 
 // components
-import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 // lib
@@ -28,9 +27,9 @@ export default async function ManagementHeader() {
       {/* sidebar header */}
       <div className="flex items-center justify-center gap-1">
         {/* sidebar trigger */}
-        <SidebarTrigger className="w-5 m-3 text-grey-200" />
+        <SidebarTrigger className="w-5 px-3 py-3 m-2" />
         {/* separator */}
-        <Separator className="h-6 w-0.5" orientation="vertical" />
+        <Separator className="bg-slate-300! h-6! w-[0.5px]!" orientation="vertical" />
         {/* home icon to "/" */}
         <Link
           href="/"

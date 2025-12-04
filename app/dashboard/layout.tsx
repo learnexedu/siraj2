@@ -1,8 +1,13 @@
+// componetns
 import { Sidebar } from "@/components/dashboard/sidebar";
 import { DashboardHeader } from "@/components/dashboard/header";
+import { ForbiddenError } from "@/components/shared/error/forbidden-error";
+
+// auth
 import { auth } from "@/auth";
+
+// prisma types
 import { UserRole } from "@prisma/client";
-import { ForbiddenError } from "@/components/error/forbidden-error";
 
 export default async function DashboardLayout({
   children,

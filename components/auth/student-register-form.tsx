@@ -1,11 +1,9 @@
 "use client";
-
+// React & Next
 import React from "react";
 import Link from "next/link";
 
 // shadcn/ui
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import {
   Form,
   FormField,
@@ -14,27 +12,40 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
+import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
-// zod + hookform
+// packages
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-// other
-import { register } from "../../handlers/auth/register";
-import { UserRole } from "@prisma/client";
+// components
 import { toast } from "sonner";
-import { Eye, EyeOff } from "lucide-react";
+
+// prisma types
+import { UserRole } from "@prisma/client";
+
+// handlers
+import { register } from "@/handlers/auth/register";
+
+// schema
 import { RegisterSchema } from "@/schemas";
 
-export function StudentRegisterForm() {
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [showConfirm, setShowConfirm] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
+// icons
+import { Eye, EyeOff } from "lucide-react";
 
+export function StudentRegisterForm() {
+  // state
+  const [loading, setLoading] = React.useState(false);
+  const [showConfirm, setShowConfirm] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  // form
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
+    reValidateMode: "onChange",
     defaultValues: {
       name: "",
       email: "",
@@ -69,7 +80,7 @@ export function StudentRegisterForm() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
       <Card className="w-full max-w-md p-8 shadow-lg border-slate-200">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-primary mb-2">إنشاء حساب</h1>

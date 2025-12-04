@@ -46,7 +46,7 @@ export function StudentInfo() {
               value={formData.fullName}
               onChange={handleChange}
               disabled={!editMode}
-              className="w-full px-4 py-2 border border-slate-200 rounded-lg disabled:bg-slate-50 disabled:cursor-not-allowed focus:outline-none focus:border-accent"
+              className="w-full px-4 py-2 border border-slate-200 rounded-lg disabled:bg-slate-50 disabled:cursor-not-allowed focus:outline-hidden focus:border-accent"
             />
           </div>
 
@@ -58,7 +58,7 @@ export function StudentInfo() {
               value={formData.nationalId}
               onChange={handleChange}
               disabled={!editMode}
-              className="w-full px-4 py-2 border border-slate-200 rounded-lg disabled:bg-slate-50 disabled:cursor-not-allowed focus:outline-none focus:border-accent"
+              className="w-full px-4 py-2 border border-slate-200 rounded-lg disabled:bg-slate-50 disabled:cursor-not-allowed focus:outline-hidden focus:border-accent"
             />
           </div>
 
@@ -70,7 +70,7 @@ export function StudentInfo() {
               value={formData.phone}
               onChange={handleChange}
               disabled={!editMode}
-              className="w-full px-4 py-2 border border-slate-200 rounded-lg disabled:bg-slate-50 disabled:cursor-not-allowed focus:outline-none focus:border-accent"
+              className="w-full px-4 py-2 border border-slate-200 rounded-lg disabled:bg-slate-50 disabled:cursor-not-allowed focus:outline-hidden focus:border-accent"
             />
           </div>
 
@@ -82,7 +82,7 @@ export function StudentInfo() {
               value={formData.email}
               onChange={handleChange}
               disabled={!editMode}
-              className="w-full px-4 py-2 border border-slate-200 rounded-lg disabled:bg-slate-50 disabled:cursor-not-allowed focus:outline-none focus:border-accent"
+              className="w-full px-4 py-2 border border-slate-200 rounded-lg disabled:bg-slate-50 disabled:cursor-not-allowed focus:outline-hidden focus:border-accent"
             />
           </div>
 
@@ -94,7 +94,7 @@ export function StudentInfo() {
               value={formData.birthDate}
               onChange={handleChange}
               disabled={!editMode}
-              className="w-full px-4 py-2 border border-slate-200 rounded-lg disabled:bg-slate-50 disabled:cursor-not-allowed focus:outline-none focus:border-accent"
+              className="w-full px-4 py-2 border border-slate-200 rounded-lg disabled:bg-slate-50 disabled:cursor-not-allowed focus:outline-hidden focus:border-accent"
             />
           </div>
 
@@ -117,7 +117,7 @@ export function StudentInfo() {
               value={formData.country}
               onChange={handleChange}
               disabled={!editMode}
-              className="w-full px-4 py-2 border border-slate-200 rounded-lg disabled:bg-slate-50 disabled:cursor-not-allowed focus:outline-none focus:border-accent"
+              className="w-full px-4 py-2 border border-slate-200 rounded-lg disabled:bg-slate-50 disabled:cursor-not-allowed focus:outline-hidden focus:border-accent"
             />
           </div>
 
@@ -129,7 +129,7 @@ export function StudentInfo() {
               value={formData.address}
               onChange={handleChange}
               disabled={!editMode}
-              className="w-full px-4 py-2 border border-slate-200 rounded-lg disabled:bg-slate-50 disabled:cursor-not-allowed focus:outline-none focus:border-accent"
+              className="w-full px-4 py-2 border border-slate-200 rounded-lg disabled:bg-slate-50 disabled:cursor-not-allowed focus:outline-hidden focus:border-accent"
             />
           </div>
         </div>

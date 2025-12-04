@@ -63,7 +63,7 @@ export function DashboardHome() {
             const Icon = update.icon
             return (
               <div key={index} className="flex gap-4 pb-4 border-b border-slate-200 last:border-b-0">
-                <div className={`w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center flex-shrink-0 ${update.color}`}>
+                <div className={`w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center shrink-0 ${update.color}`}>
                   <Icon size={20} />
                 </div>
                 <div className="flex-1">

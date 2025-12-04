@@ -1,6 +1,6 @@
 // components
-import { UnauthorizedError } from "@/components/error/unauthorized-error";
 import SupervisorSideBar from "@/components/management/supervisor/sidebar";
+import { UnauthorizedError } from "@/components/shared/error/unauthorized-error";
 
 // prisma types
 import { UserRole } from "@prisma/client";

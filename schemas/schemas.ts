@@ -26,6 +26,9 @@ export const schemas = {
   // email
   email: z
     .string()
+    .min(7, {
+      message: "البريد يجب ان يتكون من 7 احرف علي الاقل",
+    })
     .trim()
     .refine(
       (value) =>

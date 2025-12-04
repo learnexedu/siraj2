@@ -18,7 +18,7 @@ export function ForgetPasswordForm() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
       <Card className="w-full max-w-md p-8 shadow-lg border-slate-200">
         {!submitted ? (
           <>
@@ -39,7 +39,7 @@ export function ForgetPasswordForm() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="your@email.com"
                   required
-                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-accent transition-colors"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-hidden focus:border-accent transition-colors"
                 />
               </div>
 

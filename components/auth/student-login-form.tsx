@@ -34,6 +34,7 @@ export function StudentLoginForm() {
   // form
   const form = useForm<LoginSchema>({
     resolver: zodResolver(LogInSchema),
+    reValidateMode: "onChange",
     defaultValues: {
       email: "",
       password: "",
@@ -65,7 +66,7 @@ export function StudentLoginForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
       <Card className="w-full max-w-md p-8 shadow-lg border-slate-200">
         {/* Header */}
         <div className="text-center mb-8">
